@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Router from './Config/Router';
+import { Provider } from 'react-redux';
+import { store, persistor } from './Store';
+// import {Fab} from 'react-floating-action-button' 
+import { PersistGate } from 'redux-persist/integration/react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+      <div className="App">
+        <header className="App-header">
+          <h1 ><b>Q App</b></h1>
+          <Router />
+        </header>
+      </div>
+      </PersistGate>
+      </Provider>
+    );
+  }
 }
 
 export default App;
+
+/*
+fetch('https://opentdb.com/api.php?amount=10')
+.then(res => res.json())
+.then(res => console.log(res))
+
+*/
